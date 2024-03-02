@@ -1,0 +1,19 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Thay 'main' bằng tên branch của bạn
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
