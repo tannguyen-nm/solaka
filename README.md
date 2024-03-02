@@ -1,1 +1,1 @@
-#Solaka
+# Solaka Technology
