@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOLAKA TECHNOLOGY</title>
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0; /* Màu nền của trang web */
-    }
+name: Deploy to GitHub Pages
 
-    h1 {
-        color: purple; /* Màu chữ tím */
-        font-size: 36px;
-    }
-</style>
-</head>
-<body>
-    <h1>SOLAKA TECHNOLOGY</h1>
-</body>
-</html>
+on:
+  push:
+    branches:
+      - main  # Thay 'main' bằng tên branch của bạn
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
